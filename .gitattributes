@@ -3,3 +3,4 @@ reports/**/*.rpt -whitespace
 # Generated SVG path data and verbatim report excerpts retain native spacing.
 docs/figures/*.svg -whitespace
 docs/figures/*.html -whitespace
+docs/diagrams/figures/*.svg -whitespace

@@ -173,3 +173,11 @@ proof, and speedup over another processor have not been demonstrated.
 
 - RV32I v2.1: https://docs.riscv.org/reference/isa/v20260120/unpriv/rv32.html
 - M extension v2.0: https://docs.riscv.org/reference/isa/v20260120/unpriv/m-st-ext.html
+
+## Architecture diagrams
+
+![Project architecture](docs/diagrams/figures/architecture_overview.png)
+
+See the [architecture and implementation gallery](docs/ARCHITECTURE.md) for
+the detailed RTL structure and overall hardware integration
+diagrams, source mappings, scope boundaries, editable definitions, and PNG/SVG figures.

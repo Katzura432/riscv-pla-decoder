@@ -1,0 +1,11 @@
+{
+  "source_commit": "334f735b761ee4efedd6b9e1026f24b5fb12328d",
+  "method": "Annotated source-derived block diagrams; not synthesized netlist or GUI screenshots",
+  "source_sha256": {
+    "rtl/decode_pipeline.sv": "341bafa56677128a9619914ab6671c1dd11effa2f8e6cf0c3be2d3ee8307bafd",
+    "rtl/superscalar_decoder.sv": "2d76205a5b4f61171f1ae581fe91eef99a30beba355eb0ffa07effcaa9c13299",
+    "rtl/generated/decode_pkg.sv": "465752edf6daacd7e510255d468ff28753c27c8548a165d985d654b41d1cd6cd",
+    "rtl/generated/control_shared.sv": "df3b053f149cd5bc44717b697de512d33af6de45d66b5a9a352c562548c0ce07",
+    "spec/instructions.csv": "7604ee02ccebe7bd51ec642a4e9d2dda5d7e608fce75c162f7416053de3fb396"
+  }
+}

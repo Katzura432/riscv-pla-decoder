@@ -1,0 +1,397 @@
+{
+  "project": "riscv-pla-decoder",
+  "scope": "RTL decoder subsystem, not a complete CPU. PLA figures are logical structures, not a fabricated physical PLA or synthesized gate schematic.",
+  "sources": [
+    {
+      "path": "rtl/decode_pipeline.sv",
+      "contains": [
+        "superscalar_decoder",
+        "!reset && !flush"
+      ]
+    },
+    {
+      "path": "rtl/superscalar_decoder.sv",
+      "contains": [
+        "control_direct",
+        "control_pla",
+        "control_shared",
+        "raw_rs1"
+      ]
+    },
+    {
+      "path": "rtl/generated/decode_pkg.sv",
+      "contains": [
+        "function automatic decode_t payload"
+      ]
+    },
+    {
+      "path": "rtl/generated/control_shared.sv",
+      "contains": [
+        "product"
+      ]
+    },
+    {
+      "path": "spec/instructions.csv",
+      "contains": []
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "architecture_overview",
+      "title": "RISC-V PLA decoder — project architecture",
+      "subtitle": "Specification-generated logic, parallel decode lanes and registered bundle handoff",
+      "scope": "40 RV32I + 8 optional M operations; execution and complete CPU integration are outside scope.",
+      "nodes": [
+        {
+          "id": "spec",
+          "x": 3,
+          "y": 51,
+          "label": "Instruction specification\nspec/instructions.csv",
+          "kind": "artifact"
+        },
+        {
+          "id": "gen",
+          "x": 36,
+          "y": 51,
+          "label": "Python compiler / generator\nMasks, control fields\nShared product terms",
+          "kind": "artifact"
+        },
+        {
+          "id": "ctrl",
+          "x": 69,
+          "y": 51,
+          "label": "Generated control variants\nDirect / Exact PLA / Shared\nSelect one with IMPL",
+          "kind": "implemented"
+        },
+        {
+          "id": "fetch",
+          "x": 3,
+          "y": 30,
+          "label": "Instruction bundle input\n1 / 2 / 4 x 32-bit words\nLane-valid bits",
+          "kind": "external"
+        },
+        {
+          "id": "lanes",
+          "x": 36,
+          "y": 30,
+          "label": "superscalar_decoder\nParallel lane payloads\nLegality / registers / immediates",
+          "kind": "implemented"
+        },
+        {
+          "id": "pipe",
+          "x": 69,
+          "y": 30,
+          "label": "decode_pipeline\nOne-entry elastic register\nStall / flush / ready-valid",
+          "kind": "implemented"
+        },
+        {
+          "id": "deps",
+          "x": 36,
+          "y": 9,
+          "label": "In-bundle dependencies\nRAW rs1 / RAW rs2 / WAW\nOlder to younger lane pairs",
+          "kind": "implemented"
+        },
+        {
+          "id": "down",
+          "x": 69,
+          "y": 9,
+          "label": "Decoded bundle consumer\nControls, payloads\nDependency matrices",
+          "kind": "external"
+        }
+      ],
+      "edges": [
+        {
+          "from": "spec",
+          "to": "gen",
+          "label": "",
+          "kind": "data"
+        },
+        {
+          "from": "gen",
+          "to": "ctrl",
+          "label": "",
+          "kind": "data"
+        },
+        {
+          "from": "ctrl",
+          "to": "lanes",
+          "label": "",
+          "kind": "hierarchy"
+        },
+        {
+          "from": "fetch",
+          "to": "lanes",
+          "label": "",
+          "kind": "data"
+        },
+        {
+          "from": "lanes",
+          "to": "pipe",
+          "label": "",
+          "kind": "data"
+        },
+        {
+          "from": "lanes",
+          "to": "deps",
+          "label": "",
+          "kind": "data"
+        },
+        {
+          "from": "deps",
+          "to": "pipe",
+          "label": "",
+          "kind": "data"
+        },
+        {
+          "from": "pipe",
+          "to": "down",
+          "label": "",
+          "kind": "data"
+        }
+      ]
+    },
+    {
+      "id": "rtl_structure",
+      "title": "RISC-V PLA decoder — RTL hierarchy and datapath",
+      "subtitle": "Top: decode_pipeline; lane count WIDTH; control implementation IMPL",
+      "scope": "Only one generated control variant is instantiated per lane. payload() is a package function, not a separate module.",
+      "nodes": [
+        {
+          "id": "top",
+          "x": 36,
+          "y": 51,
+          "label": "decode_pipeline\nReady / valid, reset, flush",
+          "kind": "implemented"
+        },
+        {
+          "id": "regs",
+          "x": 69,
+          "y": 51,
+          "label": "Bundle output registers\nDecoded lanes + RAW/WAW\nHold while stalled",
+          "kind": "implemented"
+        },
+        {
+          "id": "sup",
+          "x": 36,
+          "y": 30,
+          "label": "u : superscalar_decoder\nWIDTH parallel lane instances",
+          "kind": "implemented"
+        },
+        {
+          "id": "ctrl",
+          "x": 3,
+          "y": 9,
+          "label": "Per-lane control instance\ncontrol_direct / control_pla /\ncontrol_shared (select one)",
+          "kind": "implemented"
+        },
+        {
+          "id": "payload",
+          "x": 36,
+          "y": 9,
+          "label": "decode_pkg::payload()\nExtract registers / immediate\nGate invalid or illegal lanes",
+          "kind": "implemented"
+        },
+        {
+          "id": "deps",
+          "x": 69,
+          "y": 9,
+          "label": "Combinational pair checks\nYounger x older comparisons\nThree WIDTH x WIDTH matrices",
+          "kind": "implemented"
+        }
+      ],
+      "edges": [
+        {
+          "from": "top",
+          "to": "sup",
+          "label": "",
+          "kind": "hierarchy"
+        },
+        {
+          "from": "top",
+          "to": "regs",
+          "label": "",
+          "kind": "hierarchy"
+        },
+        {
+          "from": "sup",
+          "to": "ctrl",
+          "label": "",
+          "kind": "hierarchy"
+        },
+        {
+          "from": "sup",
+          "to": "payload",
+          "label": "",
+          "kind": "hierarchy"
+        },
+        {
+          "from": "sup",
+          "to": "deps",
+          "label": "",
+          "kind": "hierarchy"
+        },
+        {
+          "from": "ctrl",
+          "to": "payload",
+          "label": "",
+          "kind": "data"
+        },
+        {
+          "from": "payload",
+          "to": "deps",
+          "label": "",
+          "kind": "data"
+        },
+        {
+          "from": "deps",
+          "to": "regs",
+          "label": "RAW / WAW",
+          "kind": "data",
+          "points": [
+            [
+              98,
+              15.5
+            ],
+            [
+              99,
+              15.5
+            ],
+            [
+              99,
+              57.5
+            ],
+            [
+              98,
+              57.5
+            ]
+          ],
+          "label_xy": [
+            91,
+            38
+          ]
+        },
+        {
+          "from": "payload",
+          "to": "regs",
+          "kind": "data",
+          "label": "Decoded lanes",
+          "label_xy": [
+            76,
+            46
+          ],
+          "points": [
+            [
+              64.5,
+              15.5
+            ],
+            [
+              66.5,
+              15.5
+            ],
+            [
+              66.5,
+              47
+            ],
+            [
+              75,
+              47
+            ],
+            [
+              75,
+              50.5
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hardware_context",
+      "title": "RISC-V decoder — overall CPU integration context",
+      "subtitle": "Solid blue core is supplied; dashed CPU stages and storage are external",
+      "scope": "This project does not implement fetch, register-file execution, rename, issue, caches or instruction retirement.",
+      "nodes": [
+        {
+          "id": "fetch",
+          "x": 3,
+          "y": 51,
+          "label": "Fetch / instruction storage\nProduces aligned instruction\nbundles and lane validity",
+          "kind": "external"
+        },
+        {
+          "id": "decode",
+          "x": 36,
+          "y": 51,
+          "label": "Decoder subsystem\nGenerated control + payload\nRAW / WAW bundle checks",
+          "kind": "implemented"
+        },
+        {
+          "id": "elastic",
+          "x": 69,
+          "y": 51,
+          "label": "Elastic output stage\nRegistered decoded bundle\nReady / valid / flush",
+          "kind": "implemented"
+        },
+        {
+          "id": "issue",
+          "x": 69,
+          "y": 30,
+          "label": "Rename / issue / scheduling\nResolve dependency matrices\nApply architectural state",
+          "kind": "external"
+        },
+        {
+          "id": "exec",
+          "x": 69,
+          "y": 9,
+          "label": "Execution / memory stages\nALU, branch, load/store, M\nNot implemented here",
+          "kind": "external"
+        },
+        {
+          "id": "clock",
+          "x": 36,
+          "y": 30,
+          "label": "clk, reset, flush\nout_ready from consumer\nin_ready to producer",
+          "kind": "control"
+        }
+      ],
+      "edges": [
+        {
+          "from": "fetch",
+          "to": "decode",
+          "label": "",
+          "kind": "external"
+        },
+        {
+          "from": "decode",
+          "to": "elastic",
+          "label": "",
+          "kind": "data"
+        },
+        {
+          "from": "elastic",
+          "to": "issue",
+          "label": "",
+          "kind": "external"
+        },
+        {
+          "from": "issue",
+          "to": "exec",
+          "label": "",
+          "kind": "external"
+        },
+        {
+          "from": "clock",
+          "to": "elastic",
+          "label": "",
+          "kind": "control"
+        },
+        {
+          "from": "clock",
+          "to": "decode",
+          "label": "",
+          "kind": "control"
+        }
+      ]
+    }
+  ],
+  "source_commit": "334f735b761ee4efedd6b9e1026f24b5fb12328d"
+}
