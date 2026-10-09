@@ -1,0 +1,9 @@
+build/
+__pycache__/
+.Xil/
+*.jou
+*.log
+*.str
+*.pb
+xsim.dir/
+clockInfo.txt

@@ -1,0 +1,9 @@
+{
+  "instructions": 48,
+  "rv32i_instructions": 40,
+  "control_bits": 28,
+  "exact_product_terms": 48,
+  "shared_product_terms": 99,
+  "shared_or_connections": 247,
+  "note": "Exact cube merging, not globally minimal logic; physical synthesis may map all variants similarly."
+}

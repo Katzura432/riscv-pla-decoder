@@ -1,0 +1,1 @@
+{"part":"xcu50-fsvh2104-2-e","width":2,"implementation":2,"enable_m":false,"period_ns":10.0,"worst_slack_ns":6.746,"critical_datapath_ns":3.235,"luts":433,"flip_flops":243}

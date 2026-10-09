@@ -1,0 +1,2 @@
+# Preserve Vivado's tabular report formatting without whitespace lint warnings.
+reports/**/*.rpt -whitespace
