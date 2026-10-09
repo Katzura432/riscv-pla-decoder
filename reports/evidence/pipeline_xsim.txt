@@ -1,0 +1,18 @@
+source xsim.dir/tb_pipeline/xsim_script.tcl
+# xsim {tb_pipeline} -autoloadwcfg -tclbatch {../../scripts/capture_waveform.tcl}
+Time resolution is 1 ps
+source ../../scripts/capture_waveform.tcl
+## open_vcd ../pipeline_waveform.vcd
+## log_vcd /tb_pipeline/clk
+## log_vcd /tb_pipeline/reset
+## log_vcd /tb_pipeline/flush
+## log_vcd /tb_pipeline/in_valid
+## log_vcd /tb_pipeline/in_ready
+## log_vcd /tb_pipeline/out_valid
+## log_vcd /tb_pipeline/out_ready
+## run all
+PASS: pipeline 4000 cycles, 2256 accepted, 1108 stalled, 57 flushes
+$finish called at time : 40006 ns : File "E:/Projects/pla_decoder/tb/tb_pipeline.sv" Line 55
+## close_vcd
+## quit
+INFO: [Common 17-206] Exiting xsim at Fri Oct  9 00:02:37 2026...

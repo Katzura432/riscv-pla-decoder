@@ -14,7 +14,7 @@ def main():
     lines += ['Target: Alveo U50 xcu50-fsvh2104-2-e, RV32I, 10 ns clock; identical registered boundaries.',
               'Routed out-of-context results include dependency logic; no board measurements.',
               'Clock source/skew is idealized (HD.CLK_SRC unset); external IO routing is excluded.','',
-              '| Lanes | Decoder | LUTs | Flip-flops | Worst slack (ns) | Critical datapath (ns) |',
+              '| Lanes | Decoder | LUT primitives | Flip-flops | Worst slack (ns) | Critical datapath (ns) |',
               '| --- | --- | --- | --- | --- | --- |']
     names=['Direct RTL','Exact PLA','Shared PLA']
     metrics=sorted((ROOT/'build/synthesis').glob('*_metrics.json'))

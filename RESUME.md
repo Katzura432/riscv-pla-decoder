@@ -10,7 +10,7 @@ Project title: **Superscalar RISC-V Instruction Decoder with Generated PLA Logic
   pipeline reset, stalls, replacement, and flush over 4,000 simulated cycles.
 - Compared direct RTL, exact PLA, and shared-product PLA implementations using
   nine routed out-of-context Vivado designs on an Alveo U50 target; the four-lane
-  shared PLA used 723 LUTs and 498 flip-flops with a 3.413 ns critical datapath
+  shared PLA used 615 CLB LUTs (723 LUT primitive cells) and 498 flip-flops with a 3.413 ns critical datapath
   in RV32I mode. Documented area/timing tradeoffs across architectures and widths.
 
 For a shorter resume, combine the first two bullets and include one measured

@@ -1,0 +1,44 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+    *{box-sizing:border-box}body{margin:0;background:#eef2f6;color:#172337;font-family:Arial,sans-serif;padding:40px}
+    h1{font-size:32px;margin:0 0 12px}p{font-size:17px;color:#475569;line-height:1.5}
+    section{background:white;border:1px solid #cbd5e1;border-radius:12px;padding:22px;margin-top:22px}
+    h2{font-size:20px;margin:0 0 14px}pre{font-family:Consolas,monospace;font-size:13px;line-height:1.5;white-space:pre;margin:0}
+    table{border-collapse:collapse;width:100%;font-size:19px}td,th{text-align:left;padding:16px;border-bottom:1px solid #e2e8f0}
+    th{background:#f1f5f9}.note{font-size:15px;margin-top:20px}footer{font-size:14px;margin-top:22px;color:#64748b}
+    </style></head><body><h1>Four-lane shared PLA: FPGA utilization</h1><p>Vivado reports 615 CLB LUTs after LUT combining and 498 flip-flops. The metrics JSON separately counts 723 LUT primitive cells.</p><section><pre>Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2026 Advanced Micro Devices, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2026.1 (win64) Build 6511674 Tue Jun 16 11:02:23 MDT 2026
+| Date         : Thu Oct  8 21:55:44 2026
+| Host         : DESKTOP-J9E27JR running 64-bit major release  (build 9200)
+| Command      : report_utilization -file E:/Projects/pla_decoder/build/synthesis/w4_impl2_utilization.rpt
+| Design       : benchmark_top
+| Device       : xcu50-fsvh2104-2-e
+| Speed File   : -2
+| Design State : Routed
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+
+1. CLB Logic
+------------
+
++-------------------------+------+-------+------------+-----------+-------+
+|        Site Type        | Used | Fixed | Prohibited | Available | Util% |
++-------------------------+------+-------+------------+-----------+-------+
+| CLB LUTs                |  615 |     0 |          0 |    871680 |  0.07 |
+|   LUT as Logic          |  615 |     0 |          0 |    871680 |  0.07 |
+|   LUT as Memory         |    0 |     0 |          0 |    403200 |  0.00 |
+| CLB Registers           |  498 |     0 |          0 |   1743360 |  0.03 |
+|   Register as Flip Flop |  498 |     0 |          0 |   1743360 |  0.03 |
+|   Register as Latch     |    0 |     0 |          0 |   1743360 |  0.00 |
+| CARRY8                  |    0 |     0 |          0 |    108960 |  0.00 |
+| F7 Muxes                |    0 |     0 |          0 |    435840 |  0.00 |
+| F8 Muxes                |    0 |     0 |          0 |    217920 |  0.00 |
+| F9 Muxes                |    0 |     0 |          0 |    108960 |  0.00 |
+| Unique Control Sets     |   31 |       |          0 |    217920 |  0.01 |
++-------------------------+------+-------+------------+-----------+-------+
+* Warning! LUT value is adjusted to account for LUT combining.
+** Note: Available Control Sets calculated as Slices * 2, Review the Control Sets Report for more information regarding control sets.
+
+
+</pre></section>
+    <footer>Report screenshot rendered from project evidence files. This is not a screenshot of the Vivado application UI.</footer></body></html>

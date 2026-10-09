@@ -1,0 +1,10 @@
+source xsim.dir/tb_decoder/xsim_script.tcl
+# xsim {tb_decoder} -autoloadwcfg -tclbatch {../../scripts/sim.tcl}
+Time resolution is 1 ps
+source ../../scripts/sim.tcl
+## run all
+PASS: 244040 oracle vectors; widths 1/2/4, all 3 architectures, RV32I and RV32IM, dependency matrices
+$finish called at time : 61010 ns : File "E:/Projects/pla_decoder/tb/tb_decoder.sv" Line 75
+run: Time (s): cpu = 00:00:00 ; elapsed = 00:00:07 . Memory (MB): peak = 213.637 ; gain = 0.012
+## quit
+INFO: [Common 17-206] Exiting xsim at Thu Oct  8 21:26:12 2026...

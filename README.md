@@ -9,6 +9,15 @@ See [measured results](RESULTS.md), [design notes](DESIGN.md), and
 model regression; all nine routed comparison configurations met their OOC
 timing constraints. Clock-model and board-testing limits are documented below.
 
+![Decoder architecture](docs/figures/architecture.png)
+
+![Measured FPGA area and timing](docs/figures/area_timing.png)
+
+See the [screenshots and figures gallery](docs/FIGURES.md) for original XSim
+PASS logs, all nine benchmark results, the pipeline waveform, and routed
+timing/utilization report screenshots. The plots distinguish CLB LUT utilization
+from LUT primitive-cell counts.
+
 ## Architecture
 
 ```

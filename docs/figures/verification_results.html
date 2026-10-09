@@ -1,0 +1,37 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+    *{box-sizing:border-box}body{margin:0;background:#eef2f6;color:#172337;font-family:Arial,sans-serif;padding:40px}
+    h1{font-size:32px;margin:0 0 12px}p{font-size:17px;color:#475569;line-height:1.5}
+    section{background:white;border:1px solid #cbd5e1;border-radius:12px;padding:22px;margin-top:22px}
+    h2{font-size:20px;margin:0 0 14px}pre{font-family:Consolas,monospace;font-size:13px;line-height:1.5;white-space:pre;margin:0}
+    table{border-collapse:collapse;width:100%;font-size:19px}td,th{text-align:left;padding:16px;border-bottom:1px solid #e2e8f0}
+    th{background:#f1f5f9}.note{font-size:15px;margin-top:20px}footer{font-size:14px;margin-top:22px;color:#64748b}
+    </style></head><body><h1>XSim verification results</h1><p>Independent-model decoder regression and pipeline scoreboard. Original PASS lines are preserved.</p><section><h2>Decoder regression — original XSim log excerpt</h2><pre>source xsim.dir/tb_decoder/xsim_script.tcl
+# xsim {tb_decoder} -autoloadwcfg -tclbatch {../../scripts/sim.tcl}
+Time resolution is 1 ps
+source ../../scripts/sim.tcl
+## run all
+PASS: 244040 oracle vectors; widths 1/2/4, all 3 architectures, RV32I and RV32IM, dependency matrices
+$finish called at time : 61010 ns : File &quot;E:/Projects/pla_decoder/tb/tb_decoder.sv&quot; Line 75
+run: Time (s): cpu = 00:00:00 ; elapsed = 00:00:07 . Memory (MB): peak = 213.637 ; gain = 0.012
+## quit
+INFO: [Common 17-206] Exiting xsim at Thu Oct  8 21:26:12 2026...
+</pre></section><section><h2>Pipeline regression — original XSim log excerpt</h2><pre>source xsim.dir/tb_pipeline/xsim_script.tcl
+# xsim {tb_pipeline} -autoloadwcfg -tclbatch {../../scripts/capture_waveform.tcl}
+Time resolution is 1 ps
+source ../../scripts/capture_waveform.tcl
+## open_vcd ../pipeline_waveform.vcd
+## log_vcd /tb_pipeline/clk
+## log_vcd /tb_pipeline/reset
+## log_vcd /tb_pipeline/flush
+## log_vcd /tb_pipeline/in_valid
+## log_vcd /tb_pipeline/in_ready
+## log_vcd /tb_pipeline/out_valid
+## log_vcd /tb_pipeline/out_ready
+## run all
+PASS: pipeline 4000 cycles, 2256 accepted, 1108 stalled, 57 flushes
+$finish called at time : 40006 ns : File &quot;E:/Projects/pla_decoder/tb/tb_pipeline.sv&quot; Line 55
+## close_vcd
+## quit
+INFO: [Common 17-206] Exiting xsim at Fri Oct  9 00:02:37 2026...
+</pre></section>
+    <footer>Report screenshot rendered from project evidence files. This is not a screenshot of the Vivado application UI.</footer></body></html>

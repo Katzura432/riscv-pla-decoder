@@ -8,7 +8,7 @@ Target: Alveo U50 xcu50-fsvh2104-2-e, RV32I, 10 ns clock; identical registered b
 Routed out-of-context results include dependency logic; no board measurements.
 Clock source/skew is idealized (HD.CLK_SRC unset); external IO routing is excluded.
 
-| Lanes | Decoder | LUTs | Flip-flops | Worst slack (ns) | Critical datapath (ns) |
+| Lanes | Decoder | LUT primitives | Flip-flops | Worst slack (ns) | Critical datapath (ns) |
 | --- | --- | --- | --- | --- | --- |
 | 1 | Direct RTL | 197 | 120 | 7.485 | 2.397 |
 | 1 | Exact PLA | 194 | 120 | 7.449 | 2.532 |
